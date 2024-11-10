@@ -257,17 +257,17 @@ class RoleBasedApp:
         
 
         self.role_label = tk.Label(self.role_window, text="Select Role", font=self.font, bg=self.bg_color, fg=self.fg_color)
-        self.role_label.place(relx=0.5, rely=0.4, anchor="center")
+        self.role_label.place(relx=0.5, rely=0.2, anchor="center")
         
         self.role_var = tk.StringVar(value="user")
         
         self.admin_rb = tk.Radiobutton(self.role_window, text="Admin", variable=self.role_var, value="admin", font=self.font, bg=self.bg_color, fg=self.fg_color)
-        self.admin_rb.place(relx=0.5, rely=0.45, anchor="center")
+        self.admin_rb.place(relx=0.5, rely=0.3, anchor="center")
         
         self.user_rb = tk.Radiobutton(self.role_window, text="User", variable=self.role_var, value="user", font=self.font, bg=self.bg_color, fg=self.fg_color)
-        self.user_rb.place(relx=0.5, rely=0.5, anchor="center")
+        self.user_rb.place(relx=0.5, rely=0.4, anchor="center")
         
-        tk.Button(self.role_window, text="Next", font=self.button_font, bg=self.bg_color, fg=self.fg_color, command=self.open_email_verification, relief="solid", width=20, height=2, bd=5, borderwidth=4).place(relx=0.5, rely=0.6, anchor="center")
+        tk.Button(self.role_window, text="Next", font=self.button_font, bg=self.bg_color, fg=self.fg_color, command=self.open_email_verification, relief="solid", width=20, height=2, bd=5, borderwidth=4).place(relx=0.5, rely=0.5, anchor="center")
 
     def open_email_verification(self):
         role = self.role_var.get()
@@ -313,21 +313,21 @@ class RoleBasedApp:
                 server.sendmail(from_email, email, message.as_string())
             
             messagebox.showinfo("Success", "Verification code sent successfully to your email.")
-            self.open_email_verification()
+            self.prompt_for_verification_code()
             
         except Exception as e:
             messagebox.showerror("Error", f"Failed to send verification email: {e}")
 
-    #def prompt_for_verification_code(self):
+    def prompt_for_verification_code(self):
         # Display fields for entering the verification code after confirming email sent
-        #self.verification_label = tk.Label(self.role_window, text="Enter Verification Code", font=self.font, bg=self.bg_color, fg=self.fg_color)
-        #self.verification_label.place(relx=0.5, rely=0.65, anchor="center")
+        self.verification_label = tk.Label(self.role_window, text="Enter Verification Code", font=self.font, bg=self.bg_color, fg=self.fg_color)
+        self.verification_label.place(relx=0.5, rely=0.65, anchor="center")
         
-        #self.verification_entry = tk.Entry(self.role_window, font=self.font, bd=2, relief="solid", width=30, bg=self.entry_bg, fg=self.bg_color)
-        #self.verification_entry.place(relx=0.5, rely=0.7, anchor="center")
+        self.verification_entry = tk.Entry(self.role_window, font=self.font, bd=2, relief="solid", width=30, bg=self.entry_bg, fg=self.bg_color)
+        self.verification_entry.place(relx=0.5, rely=0.7, anchor="center")
         
-        #self.verify_button = tk.Button(self.role_window, text="Verify", font=self.button_font, bg=self.bg_color, fg=self.fg_color, command=self.verify_code, relief="solid", width=20, height=2, bd=5, borderwidth=4)
-        #self.verify_button.place(relx=0.5, rely=0.75, anchor="center")
+        self.verify_button = tk.Button(self.role_window, text="Verify", font=self.button_font, bg=self.bg_color, fg=self.fg_color, command=self.verify_code, relief="solid", width=20, height=2, bd=5, borderwidth=4)
+        self.verify_button.place(relx=0.5, rely=0.75, anchor="center")
 
 
     def verify_code(self):
